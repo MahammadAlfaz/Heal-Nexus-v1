@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: heal-nexus-backend-v1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Kota@1234
+    url: jdbc:mysql://localhost:3306/heal_nexus?useSSL=false&serverTimezone=UTC
+  jpa:
+    hibernate:
+      ddl-auto: update
