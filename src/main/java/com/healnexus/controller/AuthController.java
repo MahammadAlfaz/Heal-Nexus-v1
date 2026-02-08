@@ -1,6 +1,7 @@
 package com.healnexus.controller;
 
 import com.healnexus.dto.request.UserRegistrationRequest;
+import com.healnexus.dto.response.APIResponse;
 import com.healnexus.model.User;
 import com.healnexus.service.UserService;
 import jakarta.validation.Valid;
@@ -20,13 +21,13 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/register")
-    ResponseEntity<String> register( @Valid @RequestBody UserRegistrationRequest userRegistrationRequest) {
+        ResponseEntity<APIResponse> register(@Valid @RequestBody UserRegistrationRequest userRegistrationRequest) {
         User user =new User();
         user.setEmail(userRegistrationRequest.getEmail());
         user.setPassword(userRegistrationRequest.getPassword());
         user.setRole(userRegistrationRequest.getRole());
         userService.registerUser(user);
-        return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>(new APIResponse("User registered successfully",true), HttpStatus.CREATED);
     }
 
 
