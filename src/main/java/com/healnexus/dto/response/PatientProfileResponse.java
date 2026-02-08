@@ -36,7 +36,6 @@ public class PatientProfileResponse {
     private String gender;
 
     private  String bloodGroup;
-    private boolean active = true;
 
 
     private String address;

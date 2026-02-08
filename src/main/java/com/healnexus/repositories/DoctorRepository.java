@@ -9,4 +9,9 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long> {
 
 
     boolean existsByUser_Id(Long id);
+
+
+
+
+    Doctor findByUser(User user);
 }
