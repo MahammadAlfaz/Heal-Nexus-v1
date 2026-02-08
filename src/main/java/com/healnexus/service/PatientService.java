@@ -2,6 +2,7 @@ package com.healnexus.service;
 
 
 import com.healnexus.dto.request.PatientProfileRequest;
+import com.healnexus.dto.response.PatientProfileResponse;
 import com.healnexus.exception.ResourceNotFoundException;
 import com.healnexus.model.Patient;
 import com.healnexus.model.User;
@@ -9,6 +10,7 @@ import com.healnexus.repositories.PatientRepository;
 import com.healnexus.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class PatientService {
     private final PatientRepository patientRepository;
     private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
     @Transactional
     public void completePatientProfile(PatientProfileRequest patientProfileRequest) {
         User user=userRepository.findById(patientProfileRequest.getUserId()).
@@ -40,4 +43,14 @@ public class PatientService {
          patientRepository.save(patient);
     }
 
+    public PatientProfileResponse getPatientProfile(Long userId) {
+        User user=userRepository.findById(userId).orElseThrow(
+                ()->new ResourceNotFoundException("User","userId",userId));
+        Patient patient=patientRepository.findByUser(user);
+        if(patient==null){
+            throw new ResourceNotFoundException("Patient","userId",userId);
+        }
+        return modelMapper.map(patient,PatientProfileResponse.class);
+
+    }
 }
