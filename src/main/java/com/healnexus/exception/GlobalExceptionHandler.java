@@ -35,10 +35,17 @@ public class GlobalExceptionHandler {
         APIResponse apiResponse=new APIResponse(message,false);
         return  new ResponseEntity<>(apiResponse,HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<APIResponse> genericException(Exception ex){
-
-        APIResponse apiResponse=new APIResponse( "Something went wrong. Please try again later.",false);
-        return  new ResponseEntity<>(apiResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<APIResponse> genericException(Exception ex){
+//
+//        APIResponse apiResponse=new APIResponse( "Something went wrong. Please try again later.",false);
+//        return  new ResponseEntity<>(apiResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<APIResponse> handleIllegalState(IllegalStateException ex) {
+        return new ResponseEntity<>(
+                new APIResponse( ex.getMessage(),false),
+                HttpStatus.CONFLICT
+        );
     }
 }
