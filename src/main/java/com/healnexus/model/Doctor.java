@@ -21,7 +21,7 @@ public class Doctor {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "user_id",
-    nullable = false,unique = true
+            nullable = false,unique = true
     )
     private User user;
 
