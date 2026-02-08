@@ -1,8 +1,7 @@
 package com.healnexus.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,7 +9,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@NamedEntityGraph
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "patients")
 @Entity
 public class Patient {

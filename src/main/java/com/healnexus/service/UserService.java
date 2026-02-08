@@ -14,34 +14,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final DoctorRepository doctorRepository;
-    private final PatientRepository patientRepository;
+
+
     @Transactional
-    public User registerUser(User user){
-        User savedUser= userRepository.save(user);
-
-        if(savedUser.getRole()== Role.PATIENT){
-            createPatient(savedUser);
-
+    public User registerUser(User user) {
+        User existingUser =userRepository.findByEmail(user.getEmail());
+        if(existingUser!=null){
+            throw new IllegalArgumentException("User already exists");
         }
-        else if (savedUser.getRole()== Role.DOCTOR){
-            createDoctor(savedUser);
-        }
-        return savedUser;
-    }
-
-    private void createPatient(User user){
-        Patient patient=new Patient();
-        patient.setUser(user);
-        patient.setActive(true);
-        patientRepository.save(patient);
-
-    }
-
-    private void createDoctor(User user){
-        Doctor doctor=new Doctor();
-        doctor.setUser(user);
-        doctor.setActive(true);
-        doctorRepository.save(doctor);
+        return userRepository.save(user);
     }
 }
