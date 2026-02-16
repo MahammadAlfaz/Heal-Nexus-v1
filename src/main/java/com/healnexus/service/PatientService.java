@@ -1,6 +1,7 @@
 package com.healnexus.service;
 
 
+import com.healnexus.audit.Audit;
 import com.healnexus.dto.request.PatientProfileRequest;
 import com.healnexus.dto.response.PatientProfileResponse;
 import com.healnexus.exception.ResourceNotFoundException;
@@ -19,6 +20,7 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    @Audit(action = "PATIENT_REGISTERED")
     @Transactional
     public void completePatientProfile(PatientProfileRequest patientProfileRequest) {
         User user=userRepository.findById(patientProfileRequest.getUserId()).

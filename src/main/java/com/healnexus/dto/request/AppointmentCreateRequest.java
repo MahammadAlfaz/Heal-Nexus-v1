@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 public class AppointmentCreateRequest {
     @NotNull
     private Long doctorId;
-    @NotNull
-    private Long patientUserId;
+
     @FutureOrPresent
     @NotNull
     private LocalDateTime appointmentTime;

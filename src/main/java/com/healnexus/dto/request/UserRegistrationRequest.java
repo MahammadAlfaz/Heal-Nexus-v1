@@ -19,4 +19,5 @@ public class UserRegistrationRequest {
     private String password;
     @NotNull
     private Role role;
+
 }

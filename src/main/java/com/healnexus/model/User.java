@@ -44,6 +44,14 @@ public class User {
     @Column(nullable = false)
     private boolean active = true;
 
+    @Column(nullable = false)
+    private int failedLoginAttempts=0;
+
+    @Column(nullable = false)
+    private boolean isAccountLocked=false;
+
+    private LocalDateTime lockTime;
+
 
     @PrePersist
     protected void onCreate(){

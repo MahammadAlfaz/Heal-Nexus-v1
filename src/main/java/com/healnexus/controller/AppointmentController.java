@@ -2,10 +2,12 @@ package com.healnexus.controller;
 
 import com.healnexus.dto.request.AppointmentCreateRequest;
 import com.healnexus.dto.response.AppointmentResponse;
+import com.healnexus.dto.response.PaginationResponse;
 import com.healnexus.service.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.connector.Response;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,23 +30,32 @@ public class AppointmentController {
 
     @PutMapping("/{appointmentId}/cancel")
     public ResponseEntity<AppointmentResponse> cancelAppointment(
-            @PathVariable Long appointmentId,
-            @RequestParam Long patientUserId
+            @PathVariable Long appointmentId
     ) {
         AppointmentResponse response =
-                appointmentService.cancelAppointment(appointmentId, patientUserId);
+                appointmentService.cancelAppointment(appointmentId );
 
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/patient/{patientUserId}")
-    public  ResponseEntity<List<AppointmentResponse>> getAppointmentsByPatient(@PathVariable Long patientUserId) {
-        List<AppointmentResponse> responses=appointmentService.getAppointmentsByPatient(patientUserId);
+    @PutMapping("/{appointmentId}/confirm")
+    public ResponseEntity<AppointmentResponse> confirmAppointment( @PathVariable Long appointmentId){
+        AppointmentResponse response=appointmentService.confirmAppointment(appointmentId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    @PutMapping("/{appointmentId}/complete")
+    public ResponseEntity<AppointmentResponse> completeAppointment( @PathVariable Long appointmentId){
+        AppointmentResponse response=appointmentService.completeAppointment(appointmentId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    @GetMapping("/patient/me")
+    public  ResponseEntity<PaginationResponse<AppointmentResponse>> getAppointmentsByPatient(Pageable pageable) {
+        PaginationResponse<AppointmentResponse> responses=appointmentService.getAppointmentsByPatient(pageable);
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
-    @GetMapping("/doctor/{doctorId}")
-    public ResponseEntity<List<AppointmentResponse>> getAppointmentsByDoctor(@PathVariable Long doctorId){
-        List<AppointmentResponse> responses=appointmentService.getAppointmentsByDoctor(doctorId);
+    @GetMapping("/doctor/me")
+    public ResponseEntity<PaginationResponse<AppointmentResponse>> getAppointmentsByDoctor(Pageable pageable) {
+        PaginationResponse<AppointmentResponse> responses=appointmentService.getAppointmentsByDoctor(pageable);
         return new ResponseEntity<>(responses, HttpStatus.OK);
 
 

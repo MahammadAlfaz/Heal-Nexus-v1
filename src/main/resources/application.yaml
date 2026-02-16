@@ -12,3 +12,10 @@ spring:
   properties:
     hibernate:
       format_sql: true
+jwt:
+  secret: healnexus-production-secret-key-very-secure-123456
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    com.healnexus.audit: DEBUG

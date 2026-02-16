@@ -2,6 +2,8 @@ package com.healnexus.repositories;
 
 import com.healnexus.model.Appointment;
 import com.healnexus.model.AppointmentStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +14,7 @@ import java.util.List;
 public interface AppointmentRepository  extends JpaRepository<Appointment,Long> {
     boolean existsByDoctor_IdAndAppointmentTimeAndAppointmentStatusNot(Long doctorId, LocalDateTime appointmentTime, AppointmentStatus appointmentStatus);
 
+    Page<Appointment> findByDoctor_IdAndAppointmentStatusNot(Long doctorId, AppointmentStatus appointmentStatus, Pageable pageable);
 
-
-    List<Appointment> findByPatient_User_IdAndAppointmentStatusNot(Long patientUserId, AppointmentStatus appointmentStatus);
-
-    List<Appointment> findByDoctor_IdAndAppointmentStatusNot(Long doctorId, AppointmentStatus appointmentStatus);
+    Page<Appointment> findByPatient_IdAndAppointmentStatusNot(Long id, AppointmentStatus appointmentStatus,Pageable pageable);
 }
