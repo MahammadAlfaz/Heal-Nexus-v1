@@ -88,22 +88,26 @@ The project follows a layered architecture to ensure separation of concerns and 
 ```bash
 git clone https://github.com/MahammadAlfaz/HealNexus
 cd HealNexus
-
+```
 2️⃣ Configure Database
 Update application.properties:
 Copy code
 Properties
+```bash
 spring.datasource.url=jdbc:mysql://localhost:3306/healnexus
 spring.datasource.username=YOUR_USERNAME
 spring.datasource.password=YOUR_PASSWORD
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+```
+
 3️⃣ Run the Application
 Using Maven:
 Copy code
-Bash
+```
 mvn spring-boot:run
+```
 Or run the main class from your IDE.
 🔗 API Overview
 🔐 Auth APIs
