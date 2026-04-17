@@ -70,8 +70,17 @@ HealNexus is a production-style backend system designed for managing healthcare 
 ---
 
 ## 📂 Project Structure
-src/ ├── controller/     # Handles HTTP requests & responses ├── service/        # Business logic and validations ├── repository/     # Database access (Spring Data JPA) ├── dto/            # Data Transfer Objects (request/response) ├── entity/         # JPA entities (database models) ├── security/       # JWT filters, auth config, security utils ├── exception/      # Global exception handling └── config/         # App configurations (ModelMapper, etc.)
----
+
+The project follows a layered architecture to ensure separation of concerns and maintainability:
+
+- **controller/** → Exposes REST APIs and handles HTTP requests/responses  
+- **service/** → Contains core business logic and validation rules  
+- **repository/** → Handles database interactions using Spring Data JPA  
+- **dto/** → Defines request and response models (avoids exposing entities)  
+- **entity/** → Represents database tables and domain models  
+- **security/** → JWT authentication, filters, and authorization logic  
+- **exception/** → Centralized exception handling and error responses  
+- **config/** → Application-level configurations (e.g., ModelMapper, security setup)
 
 ## ⚙️ How to Run
 
