@@ -70,3 +70,71 @@ HealNexus is a production-style backend system designed for managing healthcare 
 ---
 
 ## 📂 Project Structure
+src/ ├── controller/     # Handles HTTP requests & responses ├── service/        # Business logic and validations ├── repository/     # Database access (Spring Data JPA) ├── dto/            # Data Transfer Objects (request/response) ├── entity/         # JPA entities (database models) ├── security/       # JWT filters, auth config, security utils ├── exception/      # Global exception handling └── config/         # App configurations (ModelMapper, etc.)
+---
+
+## ⚙️ How to Run
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/MahammadAlfaz/HealNexus
+cd HealNexus
+
+2️⃣ Configure Database
+Update application.properties:
+Copy code
+Properties
+spring.datasource.url=jdbc:mysql://localhost:3306/healnexus
+spring.datasource.username=YOUR_USERNAME
+spring.datasource.password=YOUR_PASSWORD
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+3️⃣ Run the Application
+Using Maven:
+Copy code
+Bash
+mvn spring-boot:run
+Or run the main class from your IDE.
+🔗 API Overview
+🔐 Auth APIs
+POST /api/auth/register
+POST /api/auth/login
+👤 User APIs
+Manage users (Patient / Doctor / Admin)
+Role-based access control using @PreAuthorize
+📅 Appointment APIs
+Book appointment
+Confirm appointment
+Complete appointment
+Cancel appointment
+👉 Enforces strict state transitions:
+Copy code
+
+BOOKED → CONFIRMED → COMPLETED
+🧪 Testing
+Tested using Postman
+Includes:
+Auth flows (JWT)
+Role-based access testing
+Appointment lifecycle validation
+📊 Pagination
+Implemented using Spring Pageable
+Custom response wrapper:
+PaginationResponse<T>
+Max page size limit: 50
+🛡️ Security Highlights
+Stateless JWT authentication
+Custom filter: JwtAuthenticationFilter
+Role-based authorization
+Ownership validation (users can only access their data)
+📌 Future Improvements
+Doctor availability scheduling
+Integration & unit testing
+Role hierarchy (ADMIN > DOCTOR > PATIENT)
+Optimistic locking for concurrency handling
+API response standardization
+👨‍💻 Author
+Mahammad Alfaz
+GitHub: https://github.com/MahammadAlfaz
+LinkedIn: https://www.linkedin.com/in/mahammad-alfaz-b27b3225a
