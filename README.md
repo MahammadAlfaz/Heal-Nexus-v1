@@ -109,13 +109,18 @@ Copy code
 mvn spring-boot:run
 ```
 Or run the main class from your IDE.
+
+
 🔗 API Overview
+
 🔐 Auth APIs
 POST /api/auth/register
 POST /api/auth/login
+
 👤 User APIs
 Manage users (Patient / Doctor / Admin)
 Role-based access control using @PreAuthorize
+
 📅 Appointment APIs
 Book appointment
 Confirm appointment
@@ -125,28 +130,35 @@ Cancel appointment
 Copy code
 
 BOOKED → CONFIRMED → COMPLETED
+
 🧪 Testing
 Tested using Postman
 Includes:
 Auth flows (JWT)
 Role-based access testing
-Appointment lifecycle validation
+Appointment lifecycle validation.
+
 📊 Pagination
 Implemented using Spring Pageable
 Custom response wrapper:
 PaginationResponse<T>
 Max page size limit: 50
+
 🛡️ Security Highlights
 Stateless JWT authentication
 Custom filter: JwtAuthenticationFilter
 Role-based authorization
 Ownership validation (users can only access their data)
+
+
 📌 Future Improvements
 Doctor availability scheduling
 Integration & unit testing
 Role hierarchy (ADMIN > DOCTOR > PATIENT)
 Optimistic locking for concurrency handling
 API response standardization
+
+
 👨‍💻 Author
 Mahammad Alfaz
 GitHub: https://github.com/MahammadAlfaz
