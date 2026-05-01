@@ -404,15 +404,7 @@ Fields logged: `event`, `status`, `user`, `role`, `action`, `method`, `entityId`
 
 ---
 
-## Known Issues / Roadmap
-
-### Current Bugs (being fixed)
-- [ ] `confirmAppointment` and `completeAppointment` missing explicit `save()` call
-- [ ] `AccessDeniedException` not handled in `GlobalExceptionHandler`
-- [ ] JWT secret and DB credentials hardcoded in `application.yaml`
-- [ ] Refresh token cookie `secure` flag set to `false` (must be `true` in production)
-- [ ] `AuditAspect` logs object `toString()` as `entityId` for `bookAppointment`
-- [ ] `PatientService` throws `IllegalArgumentException` for duplicate patient instead of `IllegalStateException`
+argumentException` for duplicate patient instead of `IllegalStateException`
 
 ### Planned Features
 - [ ] Doctor availability scheduling (working hours + slot generation)
